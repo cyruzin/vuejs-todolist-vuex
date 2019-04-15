@@ -1,4 +1,5 @@
 # todo-list
+Refreshing Vue.js skills.
 
 ## Project setup
 ```
