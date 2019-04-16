@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import { store } from "./store/store.js";
+import store from "./store";
 import ToDoList from "./components/ToDoList.vue";
 
 export default {

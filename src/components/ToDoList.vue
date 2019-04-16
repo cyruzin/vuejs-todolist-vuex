@@ -3,17 +3,17 @@
     <input type="text" placeholder="Add a task" v-model="task">
     <button v-on:click="addTodo">ADD</button>
 
-    <div class="container" v-if="todo.length > 0">
+    <div class="container" v-if="todos.length > 0">
       <ul class="todo">
         <li
           class="list"
-          v-for="t in todo"
-          :key="t.id"
-          v-bind:class="{completed: t.completed}"
-          v-on:click="markTodo(t)"
+          v-for="todo in todos"
+          :key="todo.id"
+          v-bind:class="{completed: todo.completed}"
+          v-on:click="markTodo(todo)"
         >
-          {{ t.name }}
-          <button class="remove" v-on:click="removeTodo(t)">x</button>
+          {{ todo.name }}
+          <button class="remove" v-on:click="removeTodo(todo)">x</button>
         </li>
       </ul>
     </div>
@@ -21,6 +21,8 @@
 </template>
 
 <script>
+import store from "../store";
+
 export default {
   name: "ToDoList",
   data() {
@@ -29,20 +31,18 @@ export default {
     };
   },
   computed: {
-    todo() {
-      return this.$store.state.todo;
-    }
+    todos: () => store.state.todos
   },
   methods: {
     addTodo() {
-      this.$store.commit("addTodo", this.task);
+      store.commit("addTodo", this.task);
       this.task = null;
     },
     markTodo(task) {
-      this.$store.commit("markTodo", task);
+      store.commit("markTodo", task);
     },
     removeTodo(task) {
-      this.$store.commit("removeTodo", task);
+      store.commit("removeTodo", task);
     }
   }
 };
