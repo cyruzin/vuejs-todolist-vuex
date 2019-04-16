@@ -25,26 +25,24 @@ export default {
   name: "ToDoList",
   data() {
     return {
-      task: null,
-      todo: []
+      task: null
     };
   },
+  computed: {
+    todo() {
+      return this.$store.state.todo;
+    }
+  },
   methods: {
-    addTodo: function() {
-      if (this.task === null) return false;
-      this.todo = [
-        ...this.todo,
-        { id: Date.now(), name: this.task, completed: false }
-      ];
+    addTodo() {
+      this.$store.commit("addTodo", this.task);
       this.task = null;
     },
-    markTodo: function(task) {
-      this.todo.find(t => {
-        if (t.id === task.id) t.completed = !t.completed;
-      });
+    markTodo(task) {
+      this.$store.commit("markTodo", task);
     },
-    removeTodo: function(task) {
-      this.todo = this.todo.filter(t => t.id !== task.id);
+    removeTodo(task) {
+      this.$store.commit("removeTodo", task);
     }
   }
 };

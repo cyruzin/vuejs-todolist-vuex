@@ -5,10 +5,12 @@
 </template>
 
 <script>
+import { store } from "./store/store.js";
 import ToDoList from "./components/ToDoList.vue";
 
 export default {
   name: "app",
+  store,
   components: {
     ToDoList
   }
