@@ -3,7 +3,7 @@
     <input type="text" placeholder="Add a task" v-model="task" />
     <button v-on:click="addTodo">ADD</button>
 
-    <div class="container" v-if="this.$store.state.todos.length > 0">
+    <div class="container" v-if="this.$store.state.todos.lenght > 0">
       <ul class="todo">
         <li
           class="list"
@@ -33,14 +33,17 @@ export default {
   },
   methods: {
     addTodo() {
-      this.store.commit("addTodo", this.task);
+      this.$store.commit("addTodo", this.task);
       this.task = null;
     },
     markTodo(task) {
-      this.store.commit("markTodo", task);
+      this.$store.commit("markTodo", task);
     },
     removeTodo(task) {
-      this.store.commit("removeTodo", task);
+      this.$store.commit("removeTodo", task);
+    },
+    showList() {
+      return this.$store.state.todos.lenght > 0;
     },
   },
 };
