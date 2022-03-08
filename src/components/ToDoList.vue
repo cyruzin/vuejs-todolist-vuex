@@ -1,15 +1,15 @@
 <template>
   <div>
-    <input type="text" placeholder="Add a task" v-model="task">
+    <input type="text" placeholder="Add a task" v-model="task" />
     <button v-on:click="addTodo">ADD</button>
 
-    <div class="container" v-if="todos.length > 0">
+    <div class="container" v-if="this.$store.state.todos.length > 0">
       <ul class="todo">
         <li
           class="list"
           v-for="todo in todos"
           :key="todo.id"
-          v-bind:class="{completed: todo.completed}"
+          v-bind:class="{ completed: todo.completed }"
           v-on:click="markTodo(todo)"
         >
           {{ todo.name }}
@@ -21,30 +21,28 @@
 </template>
 
 <script>
-import store from "../store";
-
 export default {
   name: "ToDoList",
   data() {
     return {
-      task: null
+      task: null,
     };
   },
   computed: {
-    todos: () => store.state.todos
+    todos: () => this.$store.state.todos,
   },
   methods: {
     addTodo() {
-      store.commit("addTodo", this.task);
+      this.store.commit("addTodo", this.task);
       this.task = null;
     },
     markTodo(task) {
-      store.commit("markTodo", task);
+      this.store.commit("markTodo", task);
     },
     removeTodo(task) {
-      store.commit("removeTodo", task);
-    }
-  }
+      this.store.commit("removeTodo", task);
+    },
+  },
 };
 </script>
 
